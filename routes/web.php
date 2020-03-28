@@ -29,7 +29,7 @@ Route::group(['middleware'=>'auth','prefix' => 'blogs'], function () {
      Route::get('/{id}/edit', 'BlogController@show_edit_page');
      Route::put('/{id}/edit','BlogController@update_blog');
      //delete blog
-     Route::get('/{id}/delete','BlogController@destroy');
+     Route::delete('/{id}/delete','BlogController@destroy')->name('blog.destroy');;
 });
 //authors
 Route::group(['middleware'=>'auth','prefix' => 'authors'], function () {

@@ -38,9 +38,11 @@
                 </td>
                 <!--Delete-->
                 <td>
-                    <a href="/blogs/{{$blog->id}}/delete">
-                        <button type="button" class="btn btn-danger">Delete</button>
-                    </a>    
+                    <form action="/blogs/{{$blog->id}}/delete" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
                 </td>    
             </tr>
         @endforeach    

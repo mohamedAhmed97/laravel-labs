@@ -92,5 +92,6 @@ class BlogController extends Controller
         $blog->delete();
         Session::flash('alert-danger', 'Blog deleted');
         return redirect()->route('blogs');  
+        
     }
 }
