@@ -10,6 +10,19 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="#">ITI Intake 40</a>
+        @if (Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        <a  class="navbar-brand" href="{{ url('/home') }}">Home</a>
+                    @else
+                        <a  class="navbar-brand" href="{{ route('login') }}">Login</a>
+
+                        @if (Route::has('register'))
+                            <a  class="navbar-brand" href="{{ route('register') }}">Register</a>
+                        @endif
+                    @endauth
+                </div>
+          @endif      
       </nav>
     <div class="row">
           <div class="container">  

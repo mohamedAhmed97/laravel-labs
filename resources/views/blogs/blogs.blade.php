@@ -11,6 +11,7 @@
             <th scope="col">Id</th>
             <th scope="col">Title</th>
             <th scope="col">Author</th>
+            <th scope="col">Created At</th>
             <th scope="col">View</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
@@ -22,6 +23,7 @@
                 <th scope="row">{{$blog->id}}</th>
                 <td>{{$blog->title}}</td>
                 <td>{{$blog->author->name}}</td>
+                <td>{{$blog->created_at->format('d-m-Y')}}</td>
                 <!--view-->
                 <td>
                      <a href="/blogs/{{$blog->id}}">

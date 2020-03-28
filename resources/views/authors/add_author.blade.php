@@ -17,17 +17,26 @@
       <label for="exampleInputName">Author Name</label>
       <input type="text" class="form-control" name="name" id="exampleInputName" placeholder="Enter Name">
       <small id="emailHelp" class="form-text text-muted">We'll never share your Name with anyone else.</small>
+      @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <!--age-->
     <div class="form-group">
         <label>Author Age</label>
         <input type="number" class="form-control" name="age" id="exampleInputAge"  placeholder="Enter age">
+        @error('age')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
       </div>
       <!--books-->
       <div class="form-group">
         <label>Author Book's Number</label>
         <input type="number" class="form-control" name="books" placeholder="Enter Books Number">
-        </div>
+        @error('books')
+          <div class="alert alert-danger">{{ $message }}</div>
+         @enderror
+      </div>
     <!--submit-->
      <button type="submit" class="btn btn-primary btn-lg btn-block">Add Author</button>
        

@@ -14,25 +14,33 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('welcome');
 });
-
 //blogs
-    //create blog
-    Route::get('/blogs/create','BlogController@show_create_page');
-    Route::post('/blogs/create','BlogController@create');
-    //show blogs
-    Route::get('blogs','BlogController@show_blogs')->name('blogs');
-    //show blog page
-    Route::get('blogs/{id}', 'BlogController@show_blog');
-    //edit blog
-    Route::get('blogs/{id}/edit', 'BlogController@show_edit_page');
-    Route::put('blogs/{id}/edit','BlogController@update_blog');
-    //delete blog
-    Route::get('blogs/{id}/delete','BlogController@destroy');
-
-
-
+Route::group(['middleware'=>'auth','prefix' => 'blogs'], function () {
+     //create blog
+     Route::get('/create','BlogController@show_create_page');
+     Route::post('/create','BlogController@create');
+     //show 
+     Route::get('/','BlogController@show_blogs')->name('blogs');
+     //show blog page
+     Route::get('/{id}', 'BlogController@show_blog');
+     //edit blog
+     Route::get('/{id}/edit', 'BlogController@show_edit_page');
+     Route::put('/{id}/edit','BlogController@update_blog');
+     //delete blog
+     Route::get('/{id}/delete','BlogController@destroy');
+});
 //authors
+Route::group(['middleware'=>'auth','prefix' => 'authors'], function () {
     //create
-    Route::get('/authors/create','AuthorController@show');
-    Route::post('/authors/create','AuthorController@create');
+    Route::get('/create','AuthorController@show');
+    Route::post('/create','AuthorController@create');  
+});
+//comments
+    //create
+    Route::post('comments/create','CommentController@create');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

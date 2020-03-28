@@ -1,7 +1,7 @@
 @extends('app')
 @section('content')  
     <!--form-->
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <!--name-->
@@ -13,6 +13,11 @@
         <div class="form-group">
             <label>Blog Body</label>
             <input type="text" class="form-control" value="{{$blog->body}}" name="body" id="exampleInputAge"  placeholder="Enter age">
+        </div>
+         <!--image-->
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Image</label>
+            <input type="file" class="form-control-file" name="image" id="exampleFormControlFile1">
         </div>
         <!--books-->
         <div class="form-group">

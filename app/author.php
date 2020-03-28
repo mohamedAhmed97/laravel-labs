@@ -10,7 +10,8 @@ class author extends Model
     protected $fillable=[
         'name',
         'age',
-        'books'
+        'books',
+        'slug'
     ];
     
  

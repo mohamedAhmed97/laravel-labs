@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\author;
+use App\Http\Requests\StoreAuthorPost;
 use Session;
 class AuthorController extends Controller
 {
@@ -14,7 +15,7 @@ class AuthorController extends Controller
     }
 
     //function of create user
-    public function create(Request $requst)
+    public function create(StoreAuthorPost $requst)
     {
         author::create([
             'name'=>$requst->name,
