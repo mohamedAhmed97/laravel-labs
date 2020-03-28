@@ -19,7 +19,7 @@ class BlogController extends Controller
     //create blog
     public function create(StoreBlogPost $request)
     {   
-        $imagename=$request->file('image').Carbon::now(); 
+        $imagename=$request->file('image')->getClientOriginalName(); 
         $path = $request->file('image')->storeAs(
             'avatars',$imagename);
         blog::create([
@@ -68,7 +68,7 @@ class BlogController extends Controller
         //Storage::delete($postion);
         unlink($postion);
         //upload new image
-        $imagename=$request->file('image').Carbon::now(); 
+        $imagename=$request->file('image')->getClientOriginalName(); 
         $path = $request->file('image')->storeAs(
             'avatars',$imagename);
         //update

@@ -44,3 +44,9 @@ Route::group(['middleware'=>'auth','prefix' => 'authors'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//github login
+Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+//facebook login
+Route::get('login/fb', 'Auth\LoginController@redirectFBToProvider');
+Route::get('login/fb/callback', 'Auth\LoginController@handleFBProviderCallback');
