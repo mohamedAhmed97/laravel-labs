@@ -75,20 +75,22 @@ class LoginController extends Controller
     //function for create or login user
     public function FindOrCreate($user)
     {
-        $user=User::where('email',$user->email)->get();
-        if(!$user)
+        $checkusers=User::where('email',$user->email)->first();
+        if(!$checkusers)
         {   
-             User::create([
+           $checkusers=User::create([
                 "name"=>$user->name,
                 "email"=>$user->email,
                 "remember_token"=>$user->token,
                 "password"=>"null"
             ]); 
-            Auth::login($user);
+            Auth::login($checkusers);
+            return redirect()->route('blogs');
         }
         else
         {
-            Auth::login($user);
+            Auth::login($checkusers);
+            return redirect()->route('blogs');
         }
     }
 
