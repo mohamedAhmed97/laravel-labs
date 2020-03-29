@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
+use App\User;
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -20,7 +22,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
+    
     /**
      * Where to redirect users after login.
      *
@@ -60,15 +62,34 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('github')->user();
-        dd($user);
+        $this->FindOrCreate($user);
         // $user->token;
     }
     //facebook
     public function handleFBProviderCallback()
     {
         $user = Socialite::driver('facebook')->user();
-        dd($user);
+        $this->FindOrCreate($user);
     }
 
+    //function for create or login user
+    public function FindOrCreate($user)
+    {
+        $user=User::where('email',$user->email)->get();
+        if(!$user)
+        {   
+             User::create([
+                "name"=>$user->name,
+                "email"=>$user->email,
+                "remember_token"=>$user->token,
+                "password"=>"null"
+            ]); 
+            Auth::login($user);
+        }
+        else
+        {
+            Auth::login($user);
+        }
+    }
 
 }
